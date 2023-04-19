@@ -46,7 +46,7 @@ pipeline {
                 script {
                     sh("""
                     chmod +x ./scripts/${params.ACTION}.sh
-                    python3 ./scripts/${params.ACTION}.sh
+                    ./scripts/${params.ACTION}.sh
                     """)
                 }
             }
