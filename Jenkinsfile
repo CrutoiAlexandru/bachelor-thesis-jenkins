@@ -41,16 +41,6 @@ pipeline {
             }
         }
 
-        stage('Checkout') {
-            steps {
-                git(
-                    credentialsId: 'jenkins-github-credentials',
-                    url: 'https://github.com/CrutoiAlexandru/bachelor-thesis-jenkins.git',
-                    branch: env.BRANCH_NAME
-                )
-            }
-        }
-
         stage('Execute script') {
             steps {
                 script {
