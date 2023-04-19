@@ -1,4 +1,4 @@
-final node = 'asg-mgmnt-agent'
+final node = 'aws-mgmnt-agent'
 
 pipeline {
     agent {
