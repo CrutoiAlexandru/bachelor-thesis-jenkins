@@ -1,5 +1,9 @@
+final node = 'asg-mgmnt-agent'
+
 pipeline {
-    agent 'asg-mgmnt-agent'
+    agent {
+        label node
+    }
 
     parameters {
         choice(
