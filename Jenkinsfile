@@ -17,7 +17,6 @@ pipeline {
                 <li>total_shutdown: shutdown all the instances on the AWS server</li>
             </ul>
             ''',
-            markupType: 'html'
         )
         string(
             name: 'INSTANCE_NAME',
@@ -25,8 +24,7 @@ pipeline {
             Name of the instance you want to apply the action to. <br>
             Used only for shutdown and startup. <br>
             If not provided, the action will not work.
-            ''',
-            markupType: 'html'
+            '''
         )
     }
 
