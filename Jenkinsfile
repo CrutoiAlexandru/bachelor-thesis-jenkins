@@ -15,7 +15,7 @@ pipeline {
                 <li>total_shutdown: shutdown all the instances on the AWS server</li>
             </ul>
             '''
-        ),
+        )
         string(
             name: 'INSTANCE_NAME',
             description: '''
@@ -51,7 +51,7 @@ pipeline {
 
         stage('Execute script') {
             steps {
-                script{
+                script {
                     sh("""
                     chmod +x ./scripts/${params.ACTION}.py
                     python3 ./scripts/${params.ACTION}.py
