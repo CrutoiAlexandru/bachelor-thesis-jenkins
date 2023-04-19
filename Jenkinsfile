@@ -14,7 +14,7 @@ pipeline {
             <ul>
                 <li>shutdown: shutdown one instance</li>
                 <li>startup: startup one instance</li>
-                <li>total_shutdown: shutdown all the instances on the AWS server</li>
+                <li>total-shutdown: shutdown all the instances on the AWS server</li>
             </ul>
             ''',
         )
