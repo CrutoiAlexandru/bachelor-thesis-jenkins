@@ -26,10 +26,10 @@ aws ec2-instance-connect send-ssh-public-key \
     --region eu-central-1 \
     --instance-id $INSTANCE_ID \
     --instance-os-user ubuntu \
-    --ssh-public-key file://$DIR/ubuntu.pub
+    --ssh-public-key file://./ubuntu.pub
 
 # Set the new authorized_keys file
-ssh -i "~/.ssh/ubuntu" -o "StrictHostKeyChecking=no" ubuntu@"$(aws ec2 describe-instances --region eu-central-1 --instance-ids "$INSTANCE_ID" --query "Reservations[].Instances[].PrivateIpAddress" --output text)" "echo $KEY > ~/.ssh/authorized_keys"
+ssh -i "/home/ubuntu/.ssh/ubuntu" -o "StrictHostKeyChecking=no" ubuntu@"$(aws ec2 describe-instances --region eu-central-1 --instance-ids "$INSTANCE_ID" --query "Reservations[].Instances[].PrivateIpAddress" --output text)" "echo $KEY > ~/.ssh/authorized_keys"
 
 rm ubuntu.pub
 
