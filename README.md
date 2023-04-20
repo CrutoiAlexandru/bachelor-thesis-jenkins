@@ -1,2 +1,2 @@
-# jenkins-update-credentials
-This is the branch jenkins-update-credentials, used under the job utility, it is meant to update credentials on a certain machine in order for it to be accessible with a general use ssh key.
+# utility-update-credentials
+This is the branch utility-update-credentials, used under the job utility, it is meant to update credentials on a certain machine in order for it to be accessible with a general use ssh key.
