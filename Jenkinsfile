@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([
-                        token(
+                        string(
                             credentialsId: 'jenkins-ubuntu-public-key',
                             variable: 'KEY'
                         )]) {
