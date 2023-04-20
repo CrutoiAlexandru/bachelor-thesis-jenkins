@@ -1,2 +1,2 @@
-# bachelor-thesis-jenkins
-This is my Jenkins code for my bachelor's thesis. It is structured on multiple branches!
+# jenkins-update-credentials
+This is the branch jenkins-update-credentials, used under the job utility, it is meant to update credentials on a certain machine in order for it to be accessible with a general use ssh key.
