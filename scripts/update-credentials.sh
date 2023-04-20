@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Set the instance name
 INSTANCE_NAME=$1
