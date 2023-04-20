@@ -28,7 +28,5 @@ aws ec2-instance-connect send-ssh-public-key \
 # Set the new authorized_keys file
 ssh -i "/home/ubuntu/.ssh/ubuntu" -o "StrictHostKeyChecking=no" ubuntu@"$(aws ec2 describe-instances --region eu-central-1 --instance-ids "$INSTANCE_ID" --query "Reservations[].Instances[].PrivateIpAddress" --output text)" "echo $KEY > ~/.ssh/authorized_keys"
 
-rm ubuntu.pub
-
 # Print success message
 echo "New authorized_keys file has been set for instance $INSTANCE_NAME ($INSTANCE_ID)."
