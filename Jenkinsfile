@@ -36,7 +36,7 @@ pipeline {
                         )]) {
                         sh("""
                             chmod +x ./scripts/update-credentials.sh
-                            ./scripts/update-credentials.sh ${params.INSTANCE_NAME} ${env.KEY}
+                            ./scripts/update-credentials.sh "${params.INSTANCE_NAME}" "${env.KEY}"
                         """)
                         }
                 }
