@@ -29,10 +29,16 @@ pipeline {
         stage('Execute script') {
             steps {
                 script {
-                    sh("""
-                    chmod +x ./scripts/update-credentials.sh
-                    ./scripts/update-credentials.sh ${params.INSTANCE_NAME}
-                    """)
+                    withCredentials([
+                        token(
+                            credentialsId: 'jenkins-ubuntu-public-key',
+                            variable: 'KEY'
+                        )]) {
+                        sh("""
+                            chmod +x ./scripts/update-credentials.sh
+                            ./scripts/update-credentials.sh ${params.INSTANCE_NAME} ${env.KEY}
+                        """)
+                        }
                 }
             }
         }
