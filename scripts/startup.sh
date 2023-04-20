@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Get the instance name
+INSTANCE_NAME=$1
+
 # Get the instance ID
 INSTANCE_ID=$(aws ec2 describe-instances --region eu-central-1 --filters "Name=tag:Name,Values=$INSTANCE_NAME" --query "Reservations[].Instances[].InstanceId" --output text)
 
