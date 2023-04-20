@@ -19,9 +19,6 @@ if [ -z "$INSTANCE_ID" ]; then
     exit 1
 fi
 
-# Get current directory
-DIR="$(pwd)"
-
 aws ec2-instance-connect send-ssh-public-key \
     --region eu-central-1 \
     --instance-id $INSTANCE_ID \
