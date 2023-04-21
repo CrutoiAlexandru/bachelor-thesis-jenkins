@@ -1,44 +1,20 @@
-final node = 'aws-mgmnt-agent'
+final node = 'cicd-ubuntu'
 
 pipeline {
     agent {
         label node
     }
 
-    parameters {
-        string(
-            name: 'INSTANCE_NAME',
-            description: '''
-            Name of the instance you want to update the credentials on. <br>
-            If not provided, the action will not work.
-            '''
-        )
-    }
-
     stages {
-        stage('Check parameters') {
+        stage('Execute build') {
             steps {
                 script {
-                    if (params.INSTANCE_NAME == '') {
-                        error('INSTANCE_NAME is required')
-                    }
-                }
-            }
-        }
-
-        stage('Execute script') {
-            steps {
-                script {
-                    withCredentials([
-                        string(
-                            credentialsId: 'jenkins-ubuntu-public-key',
-                            variable: 'KEY'
-                        )]) {
-                        sh("""
-                            chmod +x ./scripts/update-credentials.sh
-                            ./scripts/update-credentials.sh "${params.INSTANCE_NAME}" "${env.KEY}"
-                        """)
-                        }
+                    sh('''
+                    sudo apt update
+                    sudo apt install -y python3-pip
+                    pip3 install -r requirements.txt
+                    python3 src/main.py
+                    ''')
                 }
             }
         }
