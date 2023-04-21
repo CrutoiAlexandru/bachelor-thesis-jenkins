@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+    </style>
+
+</head>
+
+<body>
+    <div class="container mt-3">
+
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{{ title }}</h1>
+            </div>
+            {% if request.path != '/' %}
+            <div class="col-md-6">
+                <div class="float-right">
+                    <a href="/" class="btn btn-primary">Home</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% if description != "" %}
+        <p>{{ description | safe }}</p>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6">
+                {% if files|length > 0 %}
+                <h2>Files:</h2>
+                <ul class="list-group">
+                    {% for file in files %}
+                    <li class="list-group-item">
+                        {% if file.split('.')|length > 1 and file.split('.')|last != '' %}
+                        <i class="far fa-file-{{ file.split('.')|last }}"></i>
+                        {% else %}
+                        <i class="far fa-file"></i>
+                        {% endif %}
+                        <a href=" {{ (request.path + '/' if request.path !='/' else '' ) + file }}">
+                            {{ file }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {% if directories|length > 0 %}
+                <h2>Directories:</h2>
+                <ul class="list-group">
+                    {% for directory in directories %}
+                    <li class="list-group-item">
+                        <i class="fas fa-folder"></i>
+                        <a href="{{ (request.path + '/' if request.path != '/' else '') + directory }}">
+                            {{ directory }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="...">
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" integrity="..."></script>
+</body>
+
+</html>
