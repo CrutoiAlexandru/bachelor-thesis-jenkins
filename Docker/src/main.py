@@ -2,9 +2,6 @@ import sys
 from flask import Flask, render_template, send_file, abort
 import os
 
-# make the choice whether you want to play stuff in browser with as_attachement
-# broswers can play mp4 but not mkv, so make a button that transforms mkv to mp4
-
 app = Flask(__name__)
 
 # define the root directory for browsing
