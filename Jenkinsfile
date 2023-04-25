@@ -10,11 +10,33 @@ pipeline {
             steps {
                 script {
                     sh('''
-                    sudo apt update
-                    sudo apt install -y python3-pip
-                    pip3 install -r requirements.txt
-                    python3 src/main.py
+                    cd Docker
+                    sudo docker build -t flask-file-hosting .
                     ''')
+                }
+            }
+        }
+
+        stage('Get build number') {
+            steps {
+                script {
+                    def build = build(
+                        job: 'utility/get-build-number',
+                        parameters: [booleanParam(name: 'INCREMENT', value: 'True')])
+                    env.BUILD_NUMBER = build.getBuildVariables()['BUILD_NUMBER']
+                }
+            }
+        }
+
+        stage('Push image to DockerHub') {
+            steps {
+                script {
+                    def dockerHubRepo = 'crutoialexandru/flask-file-hosting'
+                    sh("""
+                    sudo docker tag flask-file-hosting:${env.BUILD_NUMBER} ${dockerHubRepo}:${env.BUILD_NUMBER}
+                    sudo docker push ${dockerHubRepo}:${env.BUILD_NUMBER}
+                    sudo docker system prune -a -f
+                    """)
                 }
             }
         }
