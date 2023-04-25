@@ -1,3 +1,2 @@
-# build-pysource-monitor
-This is the branch build-pysource-monitor, it has the role of building a demo product called PysourceMonitor. The role of the product is to show a CICD workflow. The product show data about the used
-resources on a PC.
+# build-flask-file-hosting
+This is the branch build-flask-file-hosting, it is a demo application for my bachelor's thesis. The application can host a folder online using flask and it runs inside a docker container that will be hosted on a public dockerhub repo. (I'll upload the link) 
