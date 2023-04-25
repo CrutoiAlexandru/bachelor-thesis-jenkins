@@ -51,5 +51,11 @@ pipeline {
                 }
             }
         }
+
+        stage('Clean WS') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }
