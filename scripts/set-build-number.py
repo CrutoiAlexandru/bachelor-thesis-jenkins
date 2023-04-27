@@ -22,7 +22,8 @@ cnx = mysql.connector.connect(user=rds_user, password=rds_password,
 cursor = cnx.cursor()
 
 select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' AND build_number = '{build_number}'"
-if (cursor.execute(select_stmt) > 0):
+cursor.execute(select_stmt)
+if (cursor.fetchall() > 0):
     print("Build number already exists")
     sys.exit(0)
 
