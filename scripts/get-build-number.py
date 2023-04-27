@@ -6,6 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 product_name = sys.argv[1].lower()
+increment = sys.argv[2].lower()
 
 rds = boto3.client('rds', region_name='eu-central-1')
 response = rds.describe_db_instances(DBInstanceIdentifier='build-number')
@@ -26,7 +27,24 @@ select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER
 cursor.execute(select_stmt)
 
 response = cursor.fetchall()
-logging.info(response)
+if (len(response) <= 0):
+    logging.info("No build number found for product: " + product_name)
+    sys.exit(1)
+
+build_number = response[0][1]
+
+if (increment == 'true'):
+    build_number = build_number.split('.')
+    build_number[-1] = str(int(build_number[-1]) + 1)
+    build_number = '.'.join(build_number)
+
+    insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', {build_number})"
+    cursor.execute(insert_stmt)
+    logging.info("Inserted new build number: " + build_number)
+
+
+os.environ['BUILD_NUMBER'] = build_number
+logging.info("Build number: " + os.environ['BUILD_NUMBER'])
 
 cnx.commit()
 cursor.close()
