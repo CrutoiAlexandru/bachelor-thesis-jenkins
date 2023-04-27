@@ -28,7 +28,7 @@ if (len(cursor.fetchall()) > 0):
     sys.exit(0)
 
 insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', '{build_number}')"
-cursor.execute(insert_stmt, insert_stmt)
+cursor.execute(insert_stmt)
 
 cnx.commit()
 cursor.close()
