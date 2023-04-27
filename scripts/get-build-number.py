@@ -38,7 +38,7 @@ if (increment == 'true'):
     build_number[-1] = str(int(build_number[-1]) + 1)
     build_number = '.'.join(build_number)
 
-    insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', {build_number})"
+    insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', '{build_number}')"
     cursor.execute(insert_stmt)
 
     select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY build_number DESC LIMIT 1"
