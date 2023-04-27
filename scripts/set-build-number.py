@@ -3,7 +3,7 @@ import os
 import boto3
 import mysql.connector
 
-product_name = sys.argv[1].toLower()
+product_name = sys.argv[1].lower()
 build_number = sys.argv[2]
 
 rds = boto3.client('rds')
