@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'PRODUCT_NAME')
+        choice(name: 'PRODUCT_NAME', choices: ['FlaskFileHosting'])
         string(name: 'BUILD_NUMBER')
     }
 
