@@ -22,7 +22,7 @@ cnx = mysql.connector.connect(user=rds_user, password=rds_password,
 
 cursor = cnx.cursor()
 
-select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY build_number DESC LIMIT 1"
+select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY build_number DESC"
 cursor.execute(select_stmt)
 
 response = cursor.fetchall()
