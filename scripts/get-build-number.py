@@ -40,7 +40,11 @@ if (increment == 'true'):
 
     insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', {build_number})"
     cursor.execute(insert_stmt)
-    logging.info("Inserted new build number: " + build_number)
+
+    select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY build_number DESC LIMIT 1"
+    cursor.execute(select_stmt)
+    response = cursor.fetchall()
+    build_number = response[0][1]
 
 
 os.environ['BUILD_NUMBER'] = build_number
