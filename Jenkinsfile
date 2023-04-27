@@ -29,17 +29,16 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'jenkins-rds-username-password', usernameVariable: 'RDS_USER', passwordVariable: 'RDS_PASSWORD')]) {
                         sh("""
                         pip3 install boto3 mysql-connector-python
-                        python3 scripts/set_build_number.py '${params.PRODUCT_NAME}' '${params.BUILD_NUMBER}'
+                        python3 scripts/set-build-number.py '${params.PRODUCT_NAME}' '${params.BUILD_NUMBER}'
                         """)
                     }
                 }
             }
         }
-
-        stage('Clean WS') {
-            steps {
-                cleanWs()
-            }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
