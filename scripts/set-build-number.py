@@ -6,7 +6,7 @@ import mysql.connector
 product_name = sys.argv[1].lower()
 build_number = sys.argv[2]
 
-rds = boto3.client('rds')
+rds = boto3.client('rds', region_name='eu-central-1')
 response = rds.describe_db_instances(DBInstanceIdentifier='build-number')
 
 rds_host = response['DBInstances'][0]['Endpoint']['Address']
