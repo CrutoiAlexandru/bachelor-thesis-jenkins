@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        stage('Get build number') {
+        stage('Set build tag') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'jenkins-rds-username-password', usernameVariable: 'RDS_USER', passwordVariable: 'RDS_PASSWORD')]) {
