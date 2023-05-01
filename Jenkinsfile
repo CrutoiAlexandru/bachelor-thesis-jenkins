@@ -27,7 +27,6 @@ pipeline {
                             booleanParam(name: 'INCREMENT', value: 'True')],
                         wait: true
                         )
-                    println("${buildNumberResult.getBuildVariables()}")
                     env.BUILD_NUMBER = buildNumberResult.getBuildVariables()['BUILD_NUMBER']
                     if (env.BUILD_NUMBER == null || env.BUILD_NUMBER == '' || env.BUILD_NUMBER == 'null') {
                         error('Build number is null')
