@@ -28,7 +28,7 @@ pipeline {
                         sh('''
                         pip3 install boto3 mysql-connector-python
                         ''')
-                        buildNumber = sh(script: "python3 scripts/get_build_number.py '${params.PRODUCT_NAME}' '${params.INCREMENT}'", returnStdout: true).trim()
+                        buildNumber = sh(script: "python3 scripts/get-build-number.py '${params.PRODUCT_NAME}' '${params.INCREMENT}'", returnStdout: true).trim()
                     }
                     env.BUILD_NUMBER = buildNumber
                     echo env.BUILD_NUMBER
