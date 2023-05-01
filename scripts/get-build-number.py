@@ -48,7 +48,6 @@ if (increment == 'true'):
 
 
 os.environ['BUILD_NUMBER'] = build_number
-logging.info("Build number: " + os.environ['BUILD_NUMBER'])
 
 cnx.commit()
 cursor.close()
