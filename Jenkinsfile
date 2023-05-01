@@ -29,7 +29,7 @@ pipeline {
                         python3 scripts/get-build-number.py '${params.PRODUCT_NAME}' '${params.INCREMENT}'
                         """)
                     }
-                    echo env.BUILD_NUMBER
+                    echo "${env.BUILD_NUMBER}"
                 }
             }
         }
