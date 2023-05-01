@@ -42,7 +42,7 @@ pipeline {
                     def dockerHubRepo = 'crutoialexandru/flask-file-hosting'
                     def productName = 'flask-file-hosting'
                     sh("""
-                    sudo docker tag ${productName}:${env.BUILD_NUMBER} ${dockerHubRepo}:${env.BUILD_NUMBER}
+                    sudo docker tag ${productName}:latest ${dockerHubRepo}:${env.BUILD_NUMBER}
                     sudo docker push ${dockerHubRepo}:${env.BUILD_NUMBER}
                     sudo docker system prune -a -f
                     """)
