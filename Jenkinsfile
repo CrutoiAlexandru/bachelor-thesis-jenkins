@@ -5,6 +5,10 @@ pipeline {
         label node
     }
 
+    triggers {
+        githubPush()
+    }
+
     stages {
         stage('Execute build') {
             steps {
@@ -46,6 +50,17 @@ pipeline {
                     sudo docker push ${dockerHubRepo}:${env.BUILD_NUMBER}
                     sudo docker system prune -a -f
                     """)
+                }
+            }
+        }
+
+        stage('Web server update') {
+            steps {
+                script {
+                    build(
+                        job: 'utility/utility-update-web-server',
+                        wait: false
+                        )
                 }
             }
         }
