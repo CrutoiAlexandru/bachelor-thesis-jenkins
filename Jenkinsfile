@@ -1,4 +1,4 @@
-final node = 'cicd-ubuntu'
+final node = 'cicd-ubuntu-agent'
 
 pipeline {
     agent {
