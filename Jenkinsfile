@@ -20,12 +20,12 @@ pipeline {
         stage('Get build number') {
             steps {
                 script {
-                    def build = build(
+                    def buildNumber = build(
                         job: 'utility/utility-get-build-number',
                         parameters: [
                             string(name: 'PRODUCT_NAME', value: 'FlaskFileHosting'),
                             booleanParam(name: 'INCREMENT', value: 'True')])
-                    env.BUILD_NUMBER = build.getBuildVariables()['BUILD_NUMBER']
+                    env.BUILD_NUMBER = buildNumber.getBuildVariables()['BUILD_NUMBER']
                     if (env.BUILD_NUMBER == null || env.BUILD_NUMBER == '' || env.BUILD_NUMBER == 'null') {
                         error('Build number is null')
                     }
