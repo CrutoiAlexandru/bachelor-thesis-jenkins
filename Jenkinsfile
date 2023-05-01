@@ -23,13 +23,15 @@ pipeline {
         stage('Get build number') {
             steps {
                 script {
+                    def buildNumber = null
                     withCredentials([usernamePassword(credentialsId: 'jenkins-rds-username-password', usernameVariable: 'RDS_USER', passwordVariable: 'RDS_PASSWORD')]) {
-                        sh("""
+                        sh('''
                         pip3 install boto3 mysql-connector-python
-                        python3 scripts/get-build-number.py '${params.PRODUCT_NAME}' '${params.INCREMENT}'
-                        """)
+                        ''')
+                        buildNumber = sh(script: "python3 scripts/get_build_number.py '${params.PRODUCT_NAME}' '${params.INCREMENT}'", returnStdout: true).trim()
                     }
-                    echo "${env.BUILD_NUMBER}"
+                    env.BUILD_NUMBER = buildNumber
+                    echo env.BUILD_NUMBER
                 }
             }
         }

@@ -28,7 +28,6 @@ cursor.execute(select_stmt)
 
 response = cursor.fetchall()
 if (len(response) <= 0):
-    logging.info("No build number found for product: " + product_name)
     sys.exit(1)
 
 build_number = response[0][1]
@@ -47,7 +46,7 @@ if (increment == 'true'):
     build_number = response[0][1]
 
 
-os.environ['BUILD_NUMBER'] = build_number
+logging.info(build_number)
 
 cnx.commit()
 cursor.close()
