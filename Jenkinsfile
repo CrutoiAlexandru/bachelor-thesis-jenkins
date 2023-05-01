@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     def build = build(
-                        job: 'utility/get-build-number',
+                        job: 'utility/utility-get-build-number',
                         parameters: [booleanParam(name: 'INCREMENT', value: 'True')])
                     env.BUILD_NUMBER = build.getBuildVariables()['BUILD_NUMBER']
                 }
