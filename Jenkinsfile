@@ -11,7 +11,7 @@ pipeline {
                 script {
                     sh('''
                     cd Docker
-                    sudo docker build -t flask-file-hosting .
+                    sudo docker build --no-cache -t flask-file-hosting .
                     ''')
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
                             string(name: 'PRODUCT_NAME', value: 'FlaskFileHosting'),
                             booleanParam(name: 'INCREMENT', value: 'True')])
                     env.BUILD_NUMBER = build.getBuildVariables()['BUILD_NUMBER']
-                    if (env.BUILD_NUMBER == null) {
+                    if (env.BUILD_NUMBER == null || env.BUILD_NUMBER == '' || env.BUILD_NUMBER == 'null') {
                         error('Build number is null')
                     }
                     println("Build number: ${env.BUILD_NUMBER}")
