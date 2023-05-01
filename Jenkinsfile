@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker run -d -p 80:80 --name web-server nginx
+                    python3 scripts/update-web-server.py
                     '''
                 }
             }
