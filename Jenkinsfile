@@ -22,8 +22,14 @@ pipeline {
                 script {
                     def build = build(
                         job: 'utility/utility-get-build-number',
-                        parameters: [booleanParam(name: 'INCREMENT', value: 'True')])
+                        parameters: [
+                            string(name: 'PRODUCT_NAME', value: 'FlaskFileHosting'),
+                            booleanParam(name: 'INCREMENT', value: 'True')])
                     env.BUILD_NUMBER = build.getBuildVariables()['BUILD_NUMBER']
+                    if (env.BUILD_NUMBER == null) {
+                        error('Build number is null')
+                    }
+                    println("Build number: ${env.BUILD_NUMBER}")
                 }
             }
         }
