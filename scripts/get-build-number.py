@@ -25,6 +25,7 @@ select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER
 cursor.execute(select_stmt)
 
 response = cursor.fetchall()
+print(response)
 if (len(response) <= 0):
     sys.exit(1)
 
