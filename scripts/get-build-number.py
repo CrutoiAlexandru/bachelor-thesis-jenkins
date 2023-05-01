@@ -25,11 +25,10 @@ select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER
 cursor.execute(select_stmt)
 
 response = cursor.fetchall()
-print(response)
 if (len(response) <= 0):
     sys.exit(1)
 
-build_number = response[0][1]
+build_number = response[0][-1]
 
 if (increment == 'true'):
     build_number = build_number.split('.')
@@ -39,10 +38,10 @@ if (increment == 'true'):
     insert_stmt = f"INSERT INTO {rds_table} (product, build_number) VALUES ('{product_name}', '{build_number}')"
     cursor.execute(insert_stmt)
 
-    select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY build_number DESC LIMIT 1"
+    select_stmt = f"SELECT * FROM {rds_table} WHERE product = '{product_name}' ORDER BY CAST(SUBSTRING_INDEX(build_number, '.', 1) AS UNSIGNED), CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(build_number, '.', 2), '.', -1) AS UNSIGNED), CAST(SUBSTRING_INDEX(build_number, '.', -1) AS UNSIGNED)"
     cursor.execute(select_stmt)
     response = cursor.fetchall()
-    build_number = response[0][1]
+    build_number = response[0][-1]
 
 
 print(build_number)
