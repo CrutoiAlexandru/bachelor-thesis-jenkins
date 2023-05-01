@@ -25,6 +25,7 @@ pipeline {
                         parameters: [
                             string(name: 'PRODUCT_NAME', value: 'FlaskFileHosting'),
                             booleanParam(name: 'INCREMENT', value: 'True')],
+                        wait: true
                         )
                     env.BUILD_NUMBER = buildNumber.buildVariables.BUILD_NUMBER
                     if (env.BUILD_NUMBER == null || env.BUILD_NUMBER == '' || env.BUILD_NUMBER == 'null') {
