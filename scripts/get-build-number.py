@@ -2,8 +2,6 @@ import sys
 import os
 import boto3
 import mysql.connector
-import logging
-logging.basicConfig(level=logging.INFO)
 
 product_name = sys.argv[1].lower()
 increment = sys.argv[2].lower()
@@ -46,7 +44,7 @@ if (increment == 'true'):
     build_number = response[0][1]
 
 
-logging.info(build_number)
+print(build_number)
 
 cnx.commit()
 cursor.close()
