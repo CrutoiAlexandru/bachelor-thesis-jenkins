@@ -26,7 +26,7 @@ pipeline {
                             string(name: 'PRODUCT_NAME', value: 'FlaskFileHosting'),
                             booleanParam(name: 'INCREMENT', value: 'True')],
                         )
-                    env.BUILD_NUMBER = buildNumber.buildVariables().get('BUILD_NUMBER')
+                    env.BUILD_NUMBER = buildNumber.buildVariables.BUILD_NUMBER
                     if (env.BUILD_NUMBER == null || env.BUILD_NUMBER == '' || env.BUILD_NUMBER == 'null') {
                         error('Build number is null')
                     }
