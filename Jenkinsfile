@@ -1,4 +1,5 @@
 final node = 'web-server-ubuntu-agent'
+final mgmnt_node = 'aws-mgmnt-agent'
 
 pipeline {
     agent {
@@ -6,6 +7,21 @@ pipeline {
     }
 
     stages {
+        stage('Get rds host') {
+            steps {
+                agent {
+                    label mgmnt_node
+                }
+
+                script {
+                    sh(script:'python3 scripts/get_rds_host.py', returnStdout: true).trim().eachLine { line ->
+                        if (line.startsWith('arn')) {
+                            env.RDS_HOST = line
+                        }
+                    }
+                }
+            }
+        }
         stage('Update web server') {
             steps {
                 script {

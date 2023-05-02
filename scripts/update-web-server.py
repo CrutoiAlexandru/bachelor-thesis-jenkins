@@ -1,14 +1,12 @@
-import sys
 import os
-import boto3
 import mysql.connector
 from get_docker_images import get_versions
+from rds_host import get_host
 
-rds = boto3.client('rds', region_name='eu-central-1')
-response = rds.describe_db_instances(DBInstanceIdentifier='build-number')
+
 content = None
 
-rds_host = response['DBInstances'][0]['Endpoint']['Address']
+rds_host = os.environ['RDS_HOST']
 rds_user = os.environ['RDS_USER']
 rds_password = os.environ['RDS_PASSWORD']
 rds_database = 'build_number'
