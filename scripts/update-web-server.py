@@ -1,6 +1,6 @@
 import os
 import mysql.connector
-from get_docker_images import get_versions
+# from get_docker_images import get_versions
 
 
 content = None
@@ -18,15 +18,11 @@ cursor = cnx.cursor()
 
 repository = 'crutoialexandru/flask-file-hosting'
 product_name = 'flaskfilehosting'
-versions = get_versions(repository)
-tags = {}
 
-for version in versions:
+select_stmt = f"SELECT build_number,tag FROM {rds_table} WHERE product = '{product_name}' ORDER BY CAST(SUBSTRING_INDEX(build_number, '.', 1) AS UNSIGNED), CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(build_number, '.', 2), '.', -1) AS UNSIGNED), CAST(SUBSTRING_INDEX(build_number, '.', -1) AS UNSIGNED) DESC"
+cursor.execute(select_stmt)
 
-    select_stmt = f"SELECT tag FROM {rds_table} WHERE product = '{product_name}' AND build_number = '{version}'"
-    cursor.execute(select_stmt)
-
-    tags[version] = cursor.fetchone()
+tags = cursor.fetchall()
 
 # header
 content = """
@@ -72,16 +68,12 @@ content += """
         <tbody>
 """
 
-for version in versions:
+for tag in tags:
     content += f"""
         <tr>
-        <td>{version}</td>
-        <td><a href="#">latest</a></td>
+        <td>{tag[0]}</td>
+        <td><a href="#">{tag[1]}</a></td>
         </tr>
-    <tr>
-        <td>{version}</td>
-        <td>{tags[version]}</td>
-    </tr>
     """
 
 content += """
