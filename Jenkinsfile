@@ -13,7 +13,6 @@ pipeline {
             }
             steps {
                 script {
-                    checkout scm
                     sh 'pip install boto3'
                     sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim().eachLine { line ->
                         if (line.startsWith('arn')) {
