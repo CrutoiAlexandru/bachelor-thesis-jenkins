@@ -8,11 +8,10 @@ pipeline {
 
     stages {
         stage('Get rds host') {
-            steps {
-                agent {
+            agent {
                     label mgmnt_node
-                }
-
+            }
+            steps {
                 script {
                     sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim().eachLine { line ->
                         if (line.startsWith('arn')) {
