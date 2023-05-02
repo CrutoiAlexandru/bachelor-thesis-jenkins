@@ -39,6 +39,13 @@ pipeline {
                 }
             }
         }
+        stage('Update web server') {
+            steps {
+                script {
+                    build(job: 'utility/utility-update-web-server', wait: false)
+                }
+            }
+        }
     }
     post {
         always {
