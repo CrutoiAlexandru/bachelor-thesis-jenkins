@@ -1,11 +1,9 @@
 import os
 import mysql.connector
 from get_docker_images import get_versions
-from rds_host import get_host
 
 
 content = None
-
 rds_host = os.environ['RDS_HOST']
 rds_user = os.environ['RDS_USER']
 rds_password = os.environ['RDS_PASSWORD']

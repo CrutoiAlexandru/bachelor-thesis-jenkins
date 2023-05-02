@@ -13,6 +13,8 @@ pipeline {
             }
             steps {
                 script {
+                    checkout scm
+                    sh 'pip install boto3'
                     sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim().eachLine { line ->
                         if (line.startsWith('arn')) {
                             env.RDS_HOST = line
@@ -26,7 +28,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'jenkins-rds-username-password', usernameVariable: 'RDS_USER', passwordVariable: 'RDS_PASSWORD')]) {
                         sh '''
-                        pip3 install boto3 mysql-connector-python
+                        pip3 install mysql-connector-python
                         python3 scripts/update-web-server.py
                         '''
                     }
