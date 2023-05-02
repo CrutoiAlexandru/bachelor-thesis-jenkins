@@ -59,7 +59,7 @@ pipeline {
                 script {
                     build(
                         job: 'utility/utility-update-web-server',
-                        wait: false
+                        wait: true
                         )
                 }
             }
