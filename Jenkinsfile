@@ -5,10 +5,6 @@ pipeline {
         label node
     }
 
-    triggers {
-        githubPush()
-    }
-
     stages {
         stage('Execute build') {
             steps {
