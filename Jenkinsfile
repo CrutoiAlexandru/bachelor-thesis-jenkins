@@ -14,7 +14,7 @@ pipeline {
                 }
 
                 script {
-                    sh(script:'python3 scripts/get_rds_host.py', returnStdout: true).trim().eachLine { line ->
+                    sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim().eachLine { line ->
                         if (line.startsWith('arn')) {
                             env.RDS_HOST = line
                         }
