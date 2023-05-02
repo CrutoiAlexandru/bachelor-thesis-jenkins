@@ -99,7 +99,8 @@ content += """
 </html>
 """
 
-with open('/server/index.html') as f:
+
+with open('/server/index.html', 'w') as f:
     f.write(content)
 
 cnx.commit()
