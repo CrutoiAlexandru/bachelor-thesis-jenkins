@@ -1,4 +1,6 @@
 import subprocess
+import logging
+logging.basicConfig(level=logging.INFO)
 
 
 def get_versions(repository):
@@ -7,6 +9,7 @@ def get_versions(repository):
     lines = output.decode('utf-8').splitlines()
     try:
         versions = [line.split(':')[1] for line in lines]
-    except IndexError:
+    except IndexError as e:
         versions = []
+        logging.info(e)
     return versions
