@@ -14,11 +14,7 @@ pipeline {
             steps {
                 script {
                     sh 'pip install boto3'
-                    sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim().eachLine { line ->
-                        if (line.startsWith('arn')) {
-                            env.RDS_HOST = line
-                        }
-                    }
+                    env.RDS_HOST = sh(script:'python3 scripts/rds_host.py', returnStdout: true).trim()
                 }
             }
         }
