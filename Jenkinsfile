@@ -10,6 +10,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    pip3 install -r boto3 mysql-connector-python
                     python3 scripts/update-web-server.py
                     '''
                 }
