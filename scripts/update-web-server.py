@@ -23,6 +23,8 @@ select_stmt = f"SELECT build_number,tag FROM {rds_table} WHERE product = '{produ
 cursor.execute(select_stmt)
 
 tags = cursor.fetchall()
+tags = [tag for tag in tags if tag[0] != '1.0.0']
+tags = tags[:10]
 
 # header
 content = """
