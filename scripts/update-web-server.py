@@ -2,7 +2,7 @@ import sys
 import os
 import boto3
 import mysql.connector
-from scripts.get_docker_images import get_versions
+from get_docker_images import get_versions
 
 rds = boto3.client('rds', region_name='eu-central-1')
 response = rds.describe_db_instances(DBInstanceIdentifier='build-number')
