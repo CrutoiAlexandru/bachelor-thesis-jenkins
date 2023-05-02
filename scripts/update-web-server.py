@@ -1,7 +1,5 @@
 import os
 import mysql.connector
-# from get_docker_images import get_versions
-
 
 content = None
 rds_host = os.environ['RDS_HOST']
@@ -59,6 +57,8 @@ content += """
 
     <div class="container">
       <h2>Download</h2>
+      <p>In order to use a version of the application run: <b>docker run -p <your_port>:5000 -v '<your_volume>':'/host' -e TITLE='<your_title>' crutoialexandru/flask-file-hosting:<version></b></p>
+      <p>You can find more details here: <a href='https://hub.docker.com/r/crutoialexandru/flask-file-hosting/tags'>Repository</a></p>
       <p>Here are the available versions and tags:</p>
       <table class="table table-hover">
         <thead>
