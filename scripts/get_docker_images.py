@@ -8,7 +8,7 @@ def get_versions(repository):
     output = subprocess.check_output(cmd, shell=True)
     lines = output.decode('utf-8').splitlines()
     try:
-        versions = [line.split(':')[1] for line in lines]
+        versions = [line.split(':') for line in lines]
     except IndexError as e:
         versions = []
         logging.info(e)
